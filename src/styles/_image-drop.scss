@@ -1,0 +1,28 @@
+.image-drop {
+  width: 600px;
+  margin: auto;
+  border: 5px dashed transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1em;
+
+  &--active {
+    border-color: silver;
+  }
+
+  &__settings {
+    border-top: 1px dotted silver;
+    margin: 1em 0;
+    padding: 1em 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__reset {
+    margin-left: auto;
+  }
+
+}

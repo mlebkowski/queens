@@ -1,0 +1,29 @@
+.grid {
+  --size: 4;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(50px * var(--size));
+  height: calc(50px * var(--size));
+
+  &__cell {
+    width: calc(100%/var(--size));
+    height: calc(100%/var(--size));
+    border: 1px solid silver;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #666;
+
+    &--queen {
+      border-color: #666666;
+      border-radius: 2px;
+      border-width: 2px;
+      text-shadow: 1px 1px 5px black;
+    }
+
+    &--highlighted {
+      outline: 2px solid aqua;
+      z-index: 2;
+    }
+  }
+}

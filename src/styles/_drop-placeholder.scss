@@ -1,0 +1,11 @@
+.drop-placeholder {
+  text-align: center;
+
+  &__text {
+    margin: 1em;
+  }
+
+  &__placeholder {
+    opacity: .5;
+  }
+}

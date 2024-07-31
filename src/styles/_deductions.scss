@@ -1,0 +1,13 @@
+.deductions {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 1em;
+  margin: 1em 0;
+  min-width: 100%;
+  width: 0;
+
+  &__descriptions {
+    list-style-type: none;
+    margin: 0; padding: 0;
+  }
+}
