@@ -134,5 +134,5 @@ export function withBem<P>(
 }
 
 export namespace withBem {
-  export type props<T> = BemProps<T>;
+  export type props<T = {}> = BemProps<T>;
 }

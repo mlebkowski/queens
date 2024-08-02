@@ -1,6 +1,6 @@
 import { withBem } from "@/bem";
 
-function DropPlaceholder({ bem: { root, element } }) {
+function DropPlaceholder({ bem: { root, element } }: withBem.props) {
   return (
     <div className={root}>
       <p className={element`text`}> Drop here.</p>
