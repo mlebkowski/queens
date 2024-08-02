@@ -7,6 +7,7 @@ import readPixelMatrix from "@/readPixelMatrix";
 import createMatrix from "@/createMatrix";
 import DropPlaceholder from "@/components/DropPlaceholder";
 import classNames from "classnames";
+import Examples from "@/components/Examples";
 
 type Props = PropsWithChildren<{
   onLoad: (colors: Color[]) => void;
@@ -83,6 +84,9 @@ function ImageDrop({
               × reset
             </button>
           </div>
+        )}
+        {!isLoaded && (
+          <Examples className={element`examples`} onLoad={onLoad} />
         )}
       </div>
     </div>

@@ -16,10 +16,11 @@ export default class Persistence {
       return [];
     }
 
-    const hash = window.location.hash
-      .substring(1)
-      .replace(/-/g, "+")
-      .replace(/_/g, "/");
+    return Persistence.loadFromString(window.location.hash.substring(1));
+  }
+
+  static loadFromString(data: string) {
+    const hash = data.replace(/-/g, "+").replace(/_/g, "/");
 
     if (!hash.length) {
       return [];
