@@ -19,25 +19,22 @@ function Deductions({
         <button
           className="btn btn-md btn-primary"
           onClick={onNext}
-          disabled={onNext === null}
+          disabled={onNext === undefined}
         >
           Next
         </button>
         <button
           className="btn btn-md btn-secondary"
           onClick={onPrev}
-          disabled={onPrev === null}
+          disabled={onPrev === undefined}
         >
           Prev
         </button>
       </div>
       <ul className={element`descriptions`}>
-        {deductions
-          .reverse()
-          .slice(0, 1)
-          .map(({ description }, i) => (
-            <li key={i}>{description}</li>
-          ))}
+        {deductions.slice(deductions.length - 1).map(({ description }, i) => (
+          <li key={i}>{description}</li>
+        ))}
       </ul>
     </div>
   );

@@ -6,6 +6,10 @@
   min-width: 100%;
   width: 0;
 
+  &__buttons {
+    height: fit-content;
+  }
+
   &__descriptions {
     list-style-type: none;
     margin: 0; padding: 0;
