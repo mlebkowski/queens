@@ -1,6 +1,5 @@
 import Grid from "@/components/Grid";
 import SolverFactory from "@/solver/SolverFactory";
-import ControlPanel from "@/components/ControlPanel";
 import { useCallback, useState } from "react";
 import Deductions from "@/components/Deductions";
 import Deduction from "@/solver/Deduction";
