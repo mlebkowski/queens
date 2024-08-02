@@ -8,11 +8,12 @@ const trimStrings = (element: string | unknown): string | unknown =>
   typeof element === "string" ? element.trim() : element;
 
 type Modifier = string | string[] | object | null;
-type TemplateArgs = [string[], ...object[]];
+type TemplateArgs = [TemplateStringsArray, ...object[]];
+
 type TemplateArgsZipped = (string | object)[];
 type TemplateFn = (...args: TemplateArgs) => string;
 type TemplateFnZipped = (args: TemplateArgsZipped) => string;
-type Mixable = {
+type Mixable = string & {
   toString: () => string;
   mix: TemplateFn;
 };
@@ -54,23 +55,24 @@ function taggedLiteral(fn: TemplateFnZipped): TemplateFn {
     }
   }
 
-  return (modifiers: string[] = [], ...dynamic: object[]) =>
-    fn([...zip([...modifiers], [...dynamic])]);
+  return (
+    modifiers: TemplateStringsArray | undefined = undefined,
+    ...dynamic: object[]
+  ) => fn([...zip([...(modifiers || [])], [...dynamic])]);
 }
 
 function toSnakeCase(str: string): string {
   return str.replace(/([a-z])(?=[A-Z])/g, "$1-").toLowerCase();
 }
 
-// takes `fn() -> string` and returns `{ toString, mix }`
-function allowMixing(args: TemplateArgs, fn: TemplateFn): Mixable {
+function allowMixing(args: TemplateArgs, fn: TemplateFn) {
   const base = fn(...args);
   return {
     toString: () => base,
     mix: taggedLiteral((mixes) =>
       [base, classNames(...mixes.map(trimStrings).filter(nonEmpty))].join(" "),
     ),
-  };
+  } as Mixable & string; // react className expects string explicitly
 }
 
 class BemHelper {
