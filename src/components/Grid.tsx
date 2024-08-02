@@ -6,10 +6,14 @@ type Props = {
   size: number;
   highlights: number[];
 };
+type ModifiersArgs = {
+  i: number;
+  queen: boolean;
+};
 
 function Grid({ bem, size, items, highlights }: withBem.props<Props>) {
   const modifiers = useCallback(
-    ({ i, queen }) => ({
+    ({ i, queen }: ModifiersArgs) => ({
       highlighted: highlights.includes(i),
       queen,
     }),
