@@ -1,4 +1,3 @@
-/** @global window */
 import classNames from "classnames";
 import React, { useMemo } from "react";
 
