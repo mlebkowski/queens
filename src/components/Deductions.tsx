@@ -2,8 +2,8 @@ import { withBem } from "@/bem";
 import Deduction from "@/solver/Deduction";
 
 type Props = {
-  onNext: () => void;
-  onPrev: () => void;
+  onNext: (() => void) | undefined;
+  onPrev: (() => void) | undefined;
   deductions: Deduction[];
 };
 

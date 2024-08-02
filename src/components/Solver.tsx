@@ -1,8 +1,13 @@
 import Grid from "@/components/Grid";
 import SolverFactory from "@/solver/SolverFactory";
 import { useCallback, useState } from "react";
-import Deductions from "@/components/Deductions";
 import Deduction from "@/solver/Deduction";
+import Deductions from "@/components/Deductions";
+
+function getLastDeductionItems(deductions: Deduction[]) {
+  const [lastDeduction] = deductions.reverse();
+  return lastDeduction?.items || [];
+}
 
 export default function Solver({ colors }: { colors: Color[] }) {
   const [step, setStep] = useState(0);
@@ -21,17 +26,17 @@ export default function Solver({ colors }: { colors: Color[] }) {
   // copy before we peek:
   const results = solver.results;
   const nextEnabled = !engine.next().done;
-
-  const [{ items }] = deductions.reverse().concat(new Deduction("Dummy", []));
-  const highlights = items.map(({ point: { x, y } }) => x + size * y);
+  const highlights = getLastDeductionItems(deductions).map(
+    ({ point: { x, y } }) => x + size * y,
+  );
 
   return (
     <div>
       <Grid size={size} items={results} highlights={highlights} />
       <Deductions
         deductions={deductions}
-        onNext={nextEnabled ? onNext : null}
-        onPrev={step > 0 ? onPrev : null}
+        onNext={nextEnabled ? onNext : undefined}
+        onPrev={step > 0 ? onPrev : undefined}
       />
     </div>
   );
