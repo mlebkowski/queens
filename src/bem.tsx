@@ -75,7 +75,7 @@ function allowMixing(args: TemplateArgs, fn: TemplateFn): Mixable {
 
 class BemHelper {
   private readonly bemFactory: BemFactory;
-  private readonly root: string;
+  public readonly root: string;
 
   constructor(private readonly name: string) {
     this.bemFactory = new BemFactory(toSnakeCase(name));
@@ -111,11 +111,11 @@ class BemHelper {
   }
 }
 
-export type BemProps = typeof BemHelper;
+type BemProps<P> = { bem: BemHelper } & P;
 
 export function withBem<P>(
   Component: React.ComponentType<P> & Function,
-): React.ComponentType<P & BemProps> {
+): React.ComponentType<BemProps<P>> {
   const name = Component.displayName || Component.name;
   if (!name && process.env.NODE_ENV === "development") {
     console.warn(
@@ -129,4 +129,8 @@ export function withBem<P>(
   };
   WrappedComponent.displayName = `Bem(${name})`;
   return WrappedComponent;
+}
+
+export namespace withBem {
+  export type props<T> = BemProps<T>;
 }
