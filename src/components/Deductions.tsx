@@ -3,6 +3,7 @@ import Deduction from "@/solver/Deduction";
 
 type Props = {
   onNext: () => void;
+  onPrev: () => void;
   deductions: Deduction[];
 };
 
@@ -11,7 +12,7 @@ function Deductions({
   deductions,
   onNext,
   onPrev,
-}: Props) {
+}: withBem.props<Props>) {
   return (
     <div className={root}>
       <div className={element`buttons`.mix`btn-group`}>
