@@ -5,7 +5,7 @@ import Deduction from "@/solver/Deduction";
 import Deductions from "@/components/Deductions";
 
 function getLastDeductionItems(deductions: Deduction[]) {
-  const [lastDeduction] = deductions.reverse();
+  const [lastDeduction] = [...deductions].reverse();
   return lastDeduction?.items || [];
 }
 

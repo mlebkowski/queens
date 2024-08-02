@@ -119,7 +119,7 @@ export function withBem<P>(
   Component: React.ComponentType<BemProps<P>> & Function,
 ): React.ComponentType<P> {
   const name = Component.displayName || Component.name;
-  if (!name && process.env.NODE_ENV === "development") {
+  if (!name) {
     console.warn(
       `withBem called on an anonymous component. Add .displayName to your component`,
       Component,
