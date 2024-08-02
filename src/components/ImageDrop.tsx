@@ -5,8 +5,6 @@ import fileReader from "@/fileReader";
 import imageLoader from "@/imageLoader";
 import readPixelMatrix from "@/readPixelMatrix";
 import createMatrix from "@/createMatrix";
-import { Simulate } from "react-dom/test-utils";
-import drop = Simulate.drop;
 import DropPlaceholder from "@/components/DropPlaceholder";
 import classNames from "classnames";
 
@@ -28,22 +26,22 @@ function ImageDrop({
 
   const onDrop = useCallback(
     (files: Blob[]) => {
-      const probeMatrix = [
-        ...createMatrix({
-          offset: {
-            y: 320,
-            x: 60,
-          },
-          count,
-          cornerOffset: 10,
-          size: 1050,
-        }),
-      ];
-
       files.forEach((file) =>
         fileReader(file)
-          .then(imageLoader(...probeMatrix))
-          .then(readPixelMatrix(...probeMatrix))
+          .then(imageLoader)
+          .then(
+            readPixelMatrix(
+              ...createMatrix({
+                offset: {
+                  y: 320,
+                  x: 60,
+                },
+                count,
+                cornerOffset: 10,
+                size: 1050,
+              }),
+            ),
+          )
           .then(onLoad),
       );
     },
