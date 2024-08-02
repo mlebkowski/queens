@@ -30,10 +30,17 @@ const getModifiers = (prefix: string, modifier: Modifier) => {
 };
 
 class BemFactory {
-  constructor(private readonly name: string) {}
+  constructor(
+    private readonly name: string,
+    private autoMix: string | undefined = undefined,
+  ) {}
 
   block(modifiers: Modifier = null): string {
-    return [this.name].concat(getModifiers(this.name, modifiers)).join(" ");
+    return classNames(
+      this.name,
+      this.autoMix,
+      getModifiers(this.name, modifiers),
+    );
   }
 
   element(block: string, modifiers: Modifier = null): string {
@@ -79,8 +86,11 @@ class BemHelper {
   private readonly bemFactory: BemFactory;
   public readonly root: string;
 
-  constructor(private readonly name: string) {
-    this.bemFactory = new BemFactory(toSnakeCase(name));
+  constructor(
+    private readonly name: string,
+    private readonly autoMix: string | undefined,
+  ) {
+    this.bemFactory = new BemFactory(toSnakeCase(name), autoMix);
     this.root = this.toString();
     this.block = this.block.bind(this);
     this.block.toString = () => this.toString();
@@ -114,10 +124,13 @@ class BemHelper {
 }
 
 type BemProps<P> = { bem: BemHelper & string } & P;
+type OptionalClassName = {
+  className?: string;
+};
 
 export function withBem<P>(
   Component: React.ComponentType<BemProps<P>> & Function,
-): React.ComponentType<P> {
+): React.ComponentType<P & OptionalClassName> {
   const name = Component.displayName || Component.name;
   if (!name) {
     console.warn(
@@ -127,7 +140,11 @@ export function withBem<P>(
   }
 
   const WrappedComponent = (args: P) => {
-    const bem = useMemo(() => new BemHelper(name), []) as BemHelper & string;
+    const parentMix = (args as OptionalClassName)?.className;
+    const bem = useMemo(
+      () => new BemHelper(name, parentMix),
+      [parentMix],
+    ) as BemHelper & string;
     return <Component {...args} bem={bem} />;
   };
   WrappedComponent.displayName = `Bem(${name})`;
