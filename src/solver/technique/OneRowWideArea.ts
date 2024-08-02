@@ -5,7 +5,7 @@ import Conclusion from "@/solver/technique/Conclusion";
 import Area from "@/solver/Area";
 
 const unique = <T>(items: T[]): T[] => [...new Set(items)];
-const uniqueCoords = (area: Area, prop: string): number[] =>
+const uniqueCoords = (area: Area, prop: "x" | "y"): number[] =>
   unique(area.empty.map(({ point }) => point[prop]));
 
 export default class OneRowWideArea implements Technique {

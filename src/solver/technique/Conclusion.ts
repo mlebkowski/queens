@@ -30,9 +30,10 @@ export default class Conclusion {
       .map((x) => new PointValue({ y, x }, State.RuledOut));
   }
 
-  sandwichRuledOut(
-    ...[{ point: alpha }, { point: bravo }]: AreaPoint
-  ): PointValue[] {
+  sandwichRuledOut([
+    { point: alpha },
+    { point: bravo },
+  ]: AreaPoint[]): PointValue[] {
     // y is same
     // not caring if out of bounds!
     return [

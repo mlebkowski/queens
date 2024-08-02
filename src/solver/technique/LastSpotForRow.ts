@@ -7,7 +7,7 @@ export default class LastSpotForRow implements Technique {
     const frequencies = areas.unsolved
       .flatMap((area) => area.empty.map(({ point: { y } }) => y))
       .reduce(
-        (acc, n) => ({
+        (acc: Record<string, number>, n) => ({
           ...acc,
           [n]: (acc[n] || 0) + 1,
         }),
@@ -16,7 +16,7 @@ export default class LastSpotForRow implements Technique {
 
     return Object.entries(frequencies)
       .filter(([, qty]) => qty === 1)
-      .map(([row]: [string, number]) => parseInt(row))
+      .map(([row]: [string, unknown]) => parseInt(row))
       .map((row) => {
         const column = areas.unsolved
           .flatMap((area) => area.empty.filter(({ point: { y } }) => row === y))

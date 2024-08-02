@@ -10,6 +10,8 @@ type RowGroup = {
   points: AreaPoint[];
 };
 
+type RowHash = Record<string, AreaPoint[]>;
+
 export default class AreaCollection {
   public readonly concludeThat: Conclusion;
 
@@ -58,9 +60,9 @@ export default class AreaCollection {
         .reduce(
           (acc, point: AreaPoint) => ({
             ...acc,
-            [point.point.y]: (acc[point.point.y] || []).concat(point),
+            [point.point.y]: (acc[`${point.point.y}`] || []).concat(point),
           }),
-          {},
+          {} as RowHash,
         ),
     ).map(([row, points]) => ({ row: parseInt(row), points }));
   }
@@ -80,7 +82,7 @@ export default class AreaCollection {
 
   private get cells(): Cell[] {
     return this.areas.reduce(
-      (cells: [], area: Area) => area.cells.concat(cells),
+      (cells: Cell[], area: Area) => area.cells.concat(cells),
       [],
     );
   }
