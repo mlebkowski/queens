@@ -1,4 +1,4 @@
-export default function fileReader(file): Promise<string> {
+export default function fileReader(file: Blob): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = () => resolve(`${reader.result}`);
