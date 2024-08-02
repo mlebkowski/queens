@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { PropsWithChildren, useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { withBem } from "@/bem";
 import fileReader from "@/fileReader";
@@ -8,12 +8,11 @@ import createMatrix from "@/createMatrix";
 import DropPlaceholder from "@/components/DropPlaceholder";
 import classNames from "classnames";
 
-type Props = {
+type Props = PropsWithChildren<{
   onLoad: (colors: Color[]) => void;
-  children: [];
   reset: () => void;
   isLoaded: boolean;
-};
+}>;
 
 function ImageDrop({
   bem: { block, element },
@@ -56,8 +55,8 @@ function ImageDrop({
     accept: { "image/*": [] },
   });
 
-  const dropPlaceholder = <DropPlaceholder />;
-  const contents = isDragActive ? dropPlaceholder : children || dropPlaceholder;
+  const placeholder = <DropPlaceholder />;
+  const contents = isDragActive || !children ? placeholder : children;
 
   return (
     <div className={block`${{ active: isDragActive }}`} {...getRootProps()}>

@@ -11,7 +11,7 @@ export default function Home() {
   useEffect(() => setColors(Persistence.load()), [setColors]);
 
   const onLoad = useCallback(
-    (colors) => {
+    (colors: Color[]) => {
       setColors(colors);
       Persistence.save(colors);
     },
