@@ -14,7 +14,7 @@ type ReadQuery = Point & {
 const approximate =
   (bitmap: Uint8ClampedArray, width: number, bpp: number = 4) =>
   ({ x, y, index }: ReadQuery) => {
-    const raw = bitmap.at((y * width + x) * bpp + index);
+    const raw = bitmap.at((y * width + x) * bpp + index) as number;
     return raw - (raw % 20); // round to the nearest 5
   };
 
