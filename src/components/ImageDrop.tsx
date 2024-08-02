@@ -10,17 +10,24 @@ import drop = Simulate.drop;
 import DropPlaceholder from "@/components/DropPlaceholder";
 import classNames from "classnames";
 
+type Props = {
+  onLoad: (colors: Color[]) => void;
+  children: [];
+  reset: () => void;
+  isLoaded: boolean;
+};
+
 function ImageDrop({
   bem: { block, element },
   onLoad,
   children,
   reset,
   isLoaded,
-}) {
+}: withBem.props<Props>) {
   const [count, setCount] = useState(9);
 
   const onDrop = useCallback(
-    (files) => {
+    (files: Blob[]) => {
       const probeMatrix = [
         ...createMatrix({
           offset: {

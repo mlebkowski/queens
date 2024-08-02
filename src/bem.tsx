@@ -113,11 +113,11 @@ class BemHelper {
   }
 }
 
-type BemProps<P> = { bem: BemHelper } & P;
+type BemProps<P> = { bem: BemHelper & string } & P;
 
 export function withBem<P>(
-  Component: React.ComponentType<P> & Function,
-): React.ComponentType<BemProps<P>> {
+  Component: React.ComponentType<BemProps<P>> & Function,
+): React.ComponentType<P> {
   const name = Component.displayName || Component.name;
   if (!name && process.env.NODE_ENV === "development") {
     console.warn(
@@ -127,7 +127,8 @@ export function withBem<P>(
   }
 
   const WrappedComponent = (args: P) => {
-    return <Component {...args} bem={useMemo(() => new BemHelper(name), [])} />;
+    const bem = useMemo(() => new BemHelper(name), []) as BemHelper & string;
+    return <Component {...args} bem={bem} />;
   };
   WrappedComponent.displayName = `Bem(${name})`;
   return WrappedComponent;
