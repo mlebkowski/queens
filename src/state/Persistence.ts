@@ -25,7 +25,7 @@ export default class Persistence {
       return [];
     }
 
-    return [...atob(hash).match(/.../g)]
+    return [...(atob(hash).match(/.../g) || [])]
       .map((chunk) => [...chunk].map((c) => c.charCodeAt(0)))
       .map(([red, green, blue]) => ({ red, green, blue }));
   }
