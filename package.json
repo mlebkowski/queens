@@ -1,5 +1,5 @@
 {
-  "name": "nassau/queens",
+  "name": "queens",
   "version": "1",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@puck/react-bem": "^0.0.2",
     "classnames": "^2.5.1",
     "next": "14.2.5",
     "prettier": "^3.3.3",

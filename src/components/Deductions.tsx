@@ -1,4 +1,4 @@
-import { withBem } from "@/bem";
+import { withBem } from "@puck/react-bem";
 import Deduction from "@/solver/Deduction";
 
 type Props = {
@@ -8,13 +8,13 @@ type Props = {
 };
 
 function Deductions({
-  bem: { root, element },
+  bem: { className, element },
   deductions,
   onNext,
   onPrev,
 }: withBem.props<Props>) {
   return (
-    <div className={root}>
+    <div className={className}>
       <div className={element`buttons`.mix`btn-group`}>
         <button
           className="btn btn-md btn-primary"
@@ -40,4 +40,4 @@ function Deductions({
   );
 }
 
-export default withBem(Deductions);
+export default withBem.named("Deductions", Deductions);

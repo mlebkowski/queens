@@ -1,4 +1,4 @@
-import { withBem } from "@/bem";
+import { withBem } from "@puck/react-bem";
 import { useCallback, useState } from "react";
 
 type Props = {
@@ -35,4 +35,4 @@ function Grid({ bem, size, items, highlights }: withBem.props<Props>) {
     </div>
   );
 }
-export default withBem(Grid);
+export default withBem.named("Grid", Grid);

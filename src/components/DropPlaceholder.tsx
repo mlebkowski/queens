@@ -1,8 +1,8 @@
-import { withBem } from "@/bem";
+import { withBem } from "@puck/react-bem";
 
-function DropPlaceholder({ bem: { root, element } }: withBem.props) {
+function DropPlaceholder({ bem: { className, element } }: withBem.props) {
   return (
-    <div className={root}>
+    <div className={className}>
       <p className={element`text`}> Drop here.</p>
       <img
         className={element`placeholder`}
@@ -13,4 +13,4 @@ function DropPlaceholder({ bem: { root, element } }: withBem.props) {
   );
 }
 
-export default withBem(DropPlaceholder);
+export default withBem.named("DropPlaceholder", DropPlaceholder);

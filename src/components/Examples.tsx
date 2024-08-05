@@ -1,4 +1,4 @@
-import { withBem } from "@/bem";
+import { withBem } from "@puck/react-bem";
 import ExampleItem from "@/components/ExampleItem";
 
 type Props = {
@@ -55,4 +55,4 @@ function Examples({ bem, onLoad }: withBem.props<Props>) {
   );
 }
 
-export default withBem(Examples);
+export default withBem.named("Examples", Examples);

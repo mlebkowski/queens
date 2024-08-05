@@ -1,4 +1,4 @@
-import { withBem } from "@/bem";
+import { withBem } from "@puck/react-bem";
 import { useCallback } from "react";
 import Persistence from "@/state/Persistence";
 

@@ -1,6 +1,6 @@
 import React, { PropsWithChildren, useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { withBem } from "@/bem";
+import { withBem } from "@puck/react-bem";
 import fileReader from "@/fileReader";
 import imageLoader from "@/imageLoader";
 import readPixelMatrix from "@/readPixelMatrix";
@@ -93,4 +93,4 @@ function ImageDrop({
   );
 }
 
-export default withBem(ImageDrop);
+export default withBem.named("ImageDrop", ImageDrop);
