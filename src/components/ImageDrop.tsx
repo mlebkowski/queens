@@ -50,7 +50,7 @@ function ImageDrop({
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    noClick: true,
+    noClick: false,
     maxFiles: 1,
     multiple: false,
     accept: { "image/*": [] },
