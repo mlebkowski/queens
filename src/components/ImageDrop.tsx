@@ -66,7 +66,7 @@ function ImageDrop({
       <div className={element`settings`.mix`btn-toolbar`}>
         Number of areas in the grid is{" "}
         <div className="btn-group ms-2">
-          {[8, 9, 10].map((number) => (
+          {[8, 9, 10, 11].map((number) => (
             <button
               key={number}
               className={classNames("btn btn-light btn-sm", {
