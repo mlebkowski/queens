@@ -2,8 +2,12 @@
   --size: 4;
   display: flex;
   flex-wrap: wrap;
-  width: calc(50px * var(--size));
-  height: calc(50px * var(--size));
+  --box-size: calc((100vw - 2em) / var(--size) );
+  @media (min-width: 768px) {
+    --box-size: 50px;
+  }
+  width: calc(var(--box-size) * var(--size));
+  height: calc(var(--box-size) * var(--size));
 
   &__cell {
     width: calc(100%/var(--size));
