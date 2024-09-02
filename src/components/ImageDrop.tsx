@@ -50,7 +50,7 @@ function ImageDrop({
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    noClick: false,
+    noClick: !!children,
     maxFiles: 1,
     multiple: false,
     accept: { "image/*": [] },
@@ -60,9 +60,11 @@ function ImageDrop({
   const contents = isDragActive || !children ? placeholder : children;
 
   return (
-    <div className={block`${{ active: isDragActive }}`} {...getRootProps()}>
-      <input {...getInputProps()} />
-      {contents}
+    <div className={block`${{ active: isDragActive }}`}>
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        {contents}
+      </div>
       <div className={element`settings`.mix`btn-toolbar`}>
         Number of areas in the grid is{" "}
         <div className="btn-group ms-2">
