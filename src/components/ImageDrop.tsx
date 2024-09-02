@@ -1,4 +1,9 @@
-import React, { PropsWithChildren, useCallback, useState } from "react";
+import React, {
+  PropsWithChildren,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { useDropzone } from "react-dropzone";
 import { withBem } from "@puck/react-bem";
 import fileReader from "@/fileReader";
@@ -23,30 +28,33 @@ function ImageDrop({
   isLoaded,
 }: withBem.props<Props>) {
   const [count, setCount] = useState(9);
+  const [file, setFile] = useState<string>();
 
-  const onDrop = useCallback(
-    (files: Blob[]) => {
-      files.forEach((file) =>
-        fileReader(file)
-          .then(imageLoader)
-          .then(
-            readPixelMatrix(
-              ...createMatrix({
-                offset: {
-                  y: 320,
-                  x: 60,
-                },
-                count,
-                cornerOffset: 10,
-                size: 1050,
-              }),
-            ),
-          )
-          .then(onLoad),
-      );
-    },
-    [onLoad, count],
-  );
+  const onDrop = useCallback((files: Blob[]) => {
+    files.forEach((file) => fileReader(file).then(setFile));
+  }, []);
+
+  useEffect(() => {
+    if (!file) {
+      return;
+    }
+
+    imageLoader(file)
+      .then(
+        readPixelMatrix(
+          ...createMatrix({
+            offset: {
+              y: 320,
+              x: 60,
+            },
+            count,
+            cornerOffset: 12,
+            size: 1050,
+          }),
+        ),
+      )
+      .then(onLoad);
+  }, [file, count, onLoad]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
